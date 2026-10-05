@@ -114,8 +114,13 @@
     color: var(--ink);
     letter-spacing: -0.045em;
   }
+  
+  .headline .row1,
   .headline .row2 {
     display: block;
+    white-space: nowrap;
+  }
+  .headline .row2 {
     margin-top: 0.06em;
   }
   .headline .love {
@@ -171,7 +176,7 @@
     display: flex; gap: 28px;
     margin-bottom: 18px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 13.5px;
+    font-size: 11.5px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--chip);
@@ -289,7 +294,8 @@
     .topbar-right { gap: 18px; font-size: 10px; }
     .topbar-right .cell.hide-sm { display: none; }
     main { padding: 4vh 22px 0; }
-    .headline { font-size: clamp(40px, 12vw, 88px); }
+    /* sized by screen width so the longest row always fits on one line */
+    .headline { font-size: clamp(28px, 10.5vw, 88px); }
     .bottom { grid-template-columns: 1fr; gap: 24px; padding-bottom: 28px; }
     .right-col { align-items: flex-start; }
   }
