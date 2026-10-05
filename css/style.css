@@ -148,20 +148,40 @@
     left: 0;
     top: 0;
     white-space: nowrap;
-    opacity: 0;
-    filter: blur(18px);
-    transform: translateY(0.04em) scale(0.985);
-    transition:
-      opacity 700ms cubic-bezier(.2,.7,.2,1),
-      filter 700ms cubic-bezier(.2,.7,.2,1),
-      transform 700ms cubic-bezier(.2,.7,.2,1);
     pointer-events: none;
   }
   .morph .word.active {
     position: relative;
+  }
+
+  /* per-letter "blur in up" (inspired by Magic UI's TextAnimate) */
+  .morph .char {
+    display: inline-block; /* transform doesn't work on inline elements */
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(0.25em);
+    transition:
+      opacity 500ms ease-out,
+      filter 500ms ease-out,
+      transform 500ms cubic-bezier(.2,.7,.2,1);
+  }
+  /* entering: letters arrive one after another, 45ms apart */
+  .morph .word.active .char {
     opacity: 1;
     filter: blur(0);
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
+    transition-delay: calc(var(--i) * 45ms);
+  }
+  /* leaving: letters blur out upwards, quicker than they came in */
+  .morph .word.leaving .char {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(-0.25em);
+    transition-duration: 300ms;
+    transition-delay: calc(var(--i) * 20ms);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .morph .char { filter: none !important; transform: none !important; }
   }
   /* ---------- bottom bar ---------- */
   .bottom {

@@ -6,7 +6,15 @@
   const spans = words.map((w, i) => {
     const s = document.createElement('span');
     s.className = 'word' + (i === 0 ? ' active' : '');
-    s.textContent = w;
+    // split the word into one span per letter so each can animate on its own;
+    // --i is the letter's position, used in CSS to stagger the delay
+    [...w].forEach((letter, n) => {
+      const c = document.createElement('span');
+      c.className = 'char';
+      c.textContent = letter;
+      c.style.setProperty('--i', n);
+      s.appendChild(c);
+    });
     morph.appendChild(s);
     return s;
   });
@@ -22,10 +30,15 @@
 
   let idx = 0;
   setInterval(() => {
-    spans[idx].classList.remove('active');
+    // old word blurs out upwards, then resets (invisibly) for its next turn
+    const old = spans[idx];
+    old.classList.remove('active');
+    old.classList.add('leaving');
+    setTimeout(() => old.classList.remove('leaving'), 500);
+
     idx = (idx + 1) % words.length;
     spans[idx].classList.add('active');
-  }, 1900);
+  }, 2200);
 
 
 
