@@ -52,7 +52,7 @@
     font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 13px;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.07em;
     color: var(--ink);
   }
   .topbar-right {
@@ -99,11 +99,12 @@
     flex-direction: column;
   }
   .headline {
-    margin: 7vh 0 0;
+    margin: auto;
+    text-align: center;
     font-family: 'Inter', sans-serif;
     font-weight: 300;
-    font-size: clamp(48px, 9.2vw, 168px);
-    line-height: 1.02;
+    font-size: clamp(60px, 9.2vw, 140px);
+    line-height: 1.022;
     letter-spacing: -0.04em;
     color: var(--muted);
     max-width: 1500px;
@@ -135,6 +136,7 @@
     letter-spacing: -0.05em;
     min-width: 1ch;
     vertical-align: baseline;
+    text-align: left; /* words start right after "love to" */
   }
   .morph .word {
     position: absolute;
@@ -156,20 +158,6 @@
     filter: blur(0);
     transform: translateY(0) scale(1);
   }
-  .morph .caret {
-    display: inline-block;
-    width: 0.05em;
-    height: 0.78em;
-    background: var(--ink);
-    margin-left: 0.04em;
-    vertical-align: -0.06em;
-    animation: blink 1.05s steps(2,end) infinite;
-    opacity: 0.85;
-  }
-  @keyframes blink {
-    50% { opacity: 0; }
-  }
-
   /* ---------- bottom bar ---------- */
   .bottom {
     margin-top: auto;
@@ -183,7 +171,7 @@
     display: flex; gap: 28px;
     margin-bottom: 18px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 10.5px;
+    font-size: 13.5px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--chip);
@@ -219,7 +207,7 @@
     letter-spacing: 0.04em;
   }
   .available .pulse {
-    width: 7px; height: 7px; border-radius: 50%;
+    width: 7px; height: 7px; border-radius: 60%;
     background: var(--accent);
     box-shadow: 0 0 0 0 rgba(31,179,128, 0.6);
     animation: pulse 1.6s infinite;

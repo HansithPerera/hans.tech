@@ -1,11 +1,8 @@
   
   
   // morphing word
-  const words = ['Scale.', 'Impact.', 'Design.', 'Build.', 'Ship.'];
+  const words = ['Scale.', 'Automate.', 'Design.', 'Build.', 'Ship.'];
   const morph = document.getElementById('morph');
-  // pre-create spans so the layout reserves the widest one
-  const widest = words.reduce((a,b) => a.length > b.length ? a : b);
-  morph.style.minWidth = widest.length + 'ch';
   const spans = words.map((w, i) => {
     const s = document.createElement('span');
     s.className = 'word' + (i === 0 ? ' active' : '');
@@ -13,6 +10,16 @@
     morph.appendChild(s);
     return s;
   });
+  // lock the box to the widest word (in em, so it scales with the responsive
+  // font-size) so "love to" never shifts when the word changes
+  function lockWidth() {
+    const fontSize = parseFloat(getComputedStyle(morph).fontSize);
+    const widest = Math.max(...spans.map(s => s.offsetWidth));
+    morph.style.width = widest / fontSize + 'em';
+  }
+  // wait for the web fonts, otherwise we'd measure the fallback font
+  document.fonts.ready.then(lockWidth);
+
   let idx = 0;
   setInterval(() => {
     spans[idx].classList.remove('active');
